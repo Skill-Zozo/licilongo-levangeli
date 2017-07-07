@@ -1,0 +1,17 @@
+<ion-searchbar #searchbar (ionInput)="search(searchbar.value)" placeholder="search for hymn"></ion-searchbar>
+<ion-list>
+  <div *ngIf="displayResults">
+    <ng-template #noResultsFound>
+      <ion-item><h2>No results found</h2></ion-item>
+    </ng-template>
+    <ng-container>
+      <ion-item *ngFor="let song of songs | async" color="light">
+        <div *ngIf="song.title; else noResultsFound">
+          <h2>{{ song.title }}</h2>
+          <p>{{ song.lyrics }}</p>
+          <button ion-button item-end (click)="goToSongPage(song)">View</button>
+        </div>
+      </ion-item>
+    </ng-container>
+  </div>
+</ion-list>
